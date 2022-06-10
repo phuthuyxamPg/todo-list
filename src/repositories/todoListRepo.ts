@@ -1,5 +1,4 @@
 import * as AWS from 'aws-sdk'
-import {ResponseStruct, BodyResponse} from "../common/response";
 import {Config} from "../config";
 
 const config = new Config();
