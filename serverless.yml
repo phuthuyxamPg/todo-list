@@ -1,4 +1,6 @@
 # Welcome to Serverless!
+app: todo-service
+org: phuthuyxam
 service: todo-service
 frameworkVersion: "2"
 
