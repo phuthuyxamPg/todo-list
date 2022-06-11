@@ -1,7 +1,7 @@
 # todo-service
 # Serverless Nodejs Rest API with TypeScript And DynamoDb
 
-This is simple REST API example for AWS Lambda By Serverless framwork with TypeScript and DynamoDb.
+This is simple REST API example for AWS Lambda By Serverless framework with TypeScript and DynamoDb.
 
 ## Use Cases
 
