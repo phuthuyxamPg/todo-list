@@ -1,19 +1,17 @@
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
+import {APIGatewayProxyEvent, APIGatewayProxyResult} from "aws-lambda";
 import {ToDoService} from "./services/toDoService"
 import {ToDoValidator} from "./validator/toDoValidator"
 import {ResponseStruct} from "./common/response"
+import {ToDoModel} from "./repositories/toDoModel";
 
 const todoListService = new ToDoService()
-const headers = {
-  "content-type": "application/json",
-};
-
 
 export const createTodoList = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     const reqBody = JSON.parse(event.body as string);
     try {
         // validate
-        const todoListValidator = new ToDoValidator(event.body)
+        const todo = new ToDoModel(event.body);
+        const todoListValidator = new ToDoValidator(todo);
         await todoListValidator.createValidate();
         const result = await todoListService.create(reqBody);
         return ResponseStruct.success(result)
@@ -22,7 +20,7 @@ export const createTodoList = async (event: APIGatewayProxyEvent): Promise<APIGa
     }
 };
 
-export const allTodoList = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+export const allTodoList = async (): Promise<APIGatewayProxyResult> => {
     try {
         const result = await todoListService.all();
         return ResponseStruct.success(result)
@@ -45,9 +43,10 @@ export const updateTodoList = async (event: APIGatewayProxyEvent): Promise<APIGa
     const reqBody = JSON.parse(event.body as string);
     try {
         // validate
-        const todoListValidator = new ToDoValidator(event.body);
+        const todo = new ToDoModel(event.body);
+        const todoListValidator = new ToDoValidator(todo);
         await todoListValidator.updateValidate();
-        let result = await todoListService.update(id, reqBody);
+        const result = await todoListService.update(id, reqBody);
         return ResponseStruct.success(result)
     } catch (err) {
         return ResponseStruct.error("has error: " + err)
@@ -57,7 +56,7 @@ export const updateTodoList = async (event: APIGatewayProxyEvent): Promise<APIGa
 export const deleteTodoItem = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     const id = event.pathParameters?.id as string
     try {
-        let result = await todoListService.delete(id);
+        const result = await todoListService.delete(id);
         return ResponseStruct.success(result)
     } catch (err) {
         return ResponseStruct.error("has error: " + err)
