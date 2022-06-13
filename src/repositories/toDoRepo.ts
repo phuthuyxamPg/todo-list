@@ -24,50 +24,26 @@ export type DeleteItemOutput = AWS.DynamoDB.DocumentClient.DeleteItemOutput;
 
 export class ToDoRepo {
     create = async(params: PutItem): Promise<PutItemOutput> => {
-        try {
-            return await docClient.put(params).promise();
-        } catch (err) {
-            throw err
-        }
+        return await docClient.put(params).promise();
     }
 
     getAll = async (params: ScanItem) : Promise<ScanOutput> => {
-        try {
-            return await docClient.scan(params).promise();
-        } catch (err) {
-            throw err
-        }
+        return await docClient.scan(params).promise();
     }
 
     get = async (params: GetItem) : Promise<GetItemOutput> => {
-        try {
-            return await docClient.get(params).promise();
-        } catch (err) {
-            throw err
-        }
+        return await docClient.get(params).promise();
     }
 
     update = async (params: UpdateItem): Promise<UpdateItemOutPut> => {
-        try {
-            return await docClient.update(params).promise();
-        } catch (err) {
-            throw err
-        }
+        return await docClient.update(params).promise();
     }
 
     query = async (params: QueryItem): Promise<QueryItemOutput> => {
-        try {
-            return await docClient.query(params).promise();
-        } catch (err) {
-            throw err
-        }
+        return await docClient.query(params).promise();
     }
 
     delete = async (params: DeleteItem): Promise<DeleteItemOutput> => {
-        try {
-            return await docClient.delete(params).promise();
-        } catch (err) {
-            throw err
-        }
+        return await docClient.delete(params).promise();
     }
 }
