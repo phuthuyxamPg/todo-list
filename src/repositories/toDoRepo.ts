@@ -22,58 +22,52 @@ export type QueryItemOutput = AWS.DynamoDB.DocumentClient.QueryOutput;
 export type DeleteItem = AWS.DynamoDB.DocumentClient.DeleteItemInput;
 export type DeleteItemOutput = AWS.DynamoDB.DocumentClient.DeleteItemOutput;
 
-export class TodoListRepo {
-    create = async(params: PutItem): Promise<PutItemOutput | Error> => {
+export class ToDoRepo {
+    create = async(params: PutItem): Promise<PutItemOutput> => {
         try {
             return await docClient.put(params).promise();
-        } catch (error) {
-            // @ts-ignore
-            return new Error(error);
+        } catch (err) {
+            throw err
         }
     }
 
-    getAll = async (params: ScanItem) : Promise<ScanOutput | Error> => {
+    getAll = async (params: ScanItem) : Promise<ScanOutput> => {
         try {
             return await docClient.scan(params).promise();
-        } catch (error) {
-            // @ts-ignore
-            return new Error(error);
+        } catch (err) {
+            throw err
         }
     }
 
-    get = async (params: GetItem) : Promise<GetItemOutput | Error> => {
+    get = async (params: GetItem) : Promise<GetItemOutput> => {
         try {
             return await docClient.get(params).promise();
-        } catch (error) {
-            // @ts-ignore
-            return new Error(error);
+        } catch (err) {
+            throw err
         }
     }
 
-    update = async (params: UpdateItem): Promise<UpdateItemOutPut | Error> => {
+    update = async (params: UpdateItem): Promise<UpdateItemOutPut> => {
         try {
             return await docClient.update(params).promise();
-        } catch (error) {
-            // @ts-ignore
-            return new Error(error);
+        } catch (err) {
+            throw err
         }
     }
 
-    query = async (params: QueryItem): Promise<QueryItemOutput | Error> => {
+    query = async (params: QueryItem): Promise<QueryItemOutput> => {
         try {
             return await docClient.query(params).promise();
-        } catch (error) {
-            // @ts-ignore
-            return new Error(error);
+        } catch (err) {
+            throw err
         }
     }
 
-    delete = async (params: DeleteItem): Promise<DeleteItemOutput | Error> => {
+    delete = async (params: DeleteItem): Promise<DeleteItemOutput> => {
         try {
             return await docClient.delete(params).promise();
-        } catch (error) {
-            // @ts-ignore
-            return new Error(error);
+        } catch (err) {
+            throw err
         }
     }
 }
