@@ -2,6 +2,7 @@ import {v4} from "uuid";
 import {PriorityCode} from "../enum/priorityCode"
 import * as Repo from "../repositories/toDoRepo"
 import {Config} from "../config";
+import {ToDoModel} from "../repositories/toDoModel";
 
 const config = new Config();
 const db = config.TABLE_NAME;
@@ -11,7 +12,7 @@ export class ToDoService {
     constructor() {
         this.todoListRepo = new Repo.ToDoRepo();
     }
-    async create(data: any) :Promise<object>{
+    async create(data: ToDoModel) :Promise<object>{
         // biz create todo list
         data.priority = data.priority ? data.priority : PriorityCode.normal;
 
@@ -33,7 +34,7 @@ export class ToDoService {
             TableName: String(db),
             Select: "ALL_ATTRIBUTES",
         };
-        
+
         return this.todoListRepo.getAll(todoList);
     }
 
@@ -49,7 +50,7 @@ export class ToDoService {
         return this.todoListRepo.get(todo);
     }
 
-    async update(id: string, data: any) :Promise<object>{
+    async update(id: string, data: ToDoModel) :Promise<object>{
         // biz update todo item
         const todoRecord : Repo.UpdateItem = {
             TableName: String(db),

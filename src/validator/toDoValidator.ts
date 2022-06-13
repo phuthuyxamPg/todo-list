@@ -1,10 +1,11 @@
 import * as yup from "yup";
+import {ToDoModel} from "../repositories/toDoModel";
 const schemaCreateOrUpdate = yup.object().shape({
     title: yup.string().required()
 });
 export class ToDoValidator {
-    private request : any;
-    constructor(req : any) {
+    request : ToDoModel;
+    constructor(req : ToDoModel) {
         this.request = req;
     }
 
