@@ -25,11 +25,11 @@ This is simple REST API example for AWS Lambda By Serverless framework with Type
 │   └── priorityCode.ts
 ├── handlers.ts                               #handler request from client
 ├── repositories
-│   └── todoListRepo.ts                       #interact with database
+│   └── toDoRepo.ts                       #interact with database
 ├── services
-│   └── todoListService.ts                    #business logic
+│   └── toDoService.ts                    #business logic
 └── validator                                 #validator data
-    └── todoListValidator.ts
+    └── toDoValidator.ts
 ```
 ## Deploy
 
