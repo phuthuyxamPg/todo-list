@@ -2,7 +2,7 @@ import * as yup from "yup";
 const schemaCreateOrUpdate = yup.object().shape({
     title: yup.string().required()
 });
-export class TodoListValidator {
+export class ToDoValidator {
     private request : any;
     constructor(req : any) {
         this.request = req;
