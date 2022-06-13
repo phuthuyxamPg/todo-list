@@ -16,7 +16,7 @@ This is simple REST API example for AWS Lambda By Serverless framework with Type
 ## Project structure
 
 ```
-.
+.src
 ├── common                                  
 │   └── response.ts                           #response skeleton
 ├── config.ts                                 
