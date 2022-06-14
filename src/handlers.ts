@@ -13,7 +13,7 @@ export const createTodoList = async (event: APIGatewayProxyEvent): Promise<APIGa
         const todo = new ToDoQueryModel(event.body);
         const todoListValidator = new ToDoValidator(todo);
         await todoListValidator.createValidate();
-        const result = await todoListService.create(reqBody);
+        const result = await todoListService.create(todo);
         return ResponseStruct.success(result)
     } catch (err) {
         return ResponseStruct.error("has error: " + err)
@@ -46,7 +46,7 @@ export const updateTodoList = async (event: APIGatewayProxyEvent): Promise<APIGa
         const todo = new ToDoQueryModel(event.body);
         const todoListValidator = new ToDoValidator(todo);
         await todoListValidator.updateValidate();
-        const result = await todoListService.update(id, reqBody);
+        const result = await todoListService.update(id, todo);
         return ResponseStruct.success(result)
     } catch (err) {
         return ResponseStruct.error("has error: " + err)
