@@ -2,7 +2,7 @@ import {APIGatewayProxyEvent, APIGatewayProxyResult} from "aws-lambda";
 import {ToDoService} from "./services/toDoService"
 import {ToDoValidator} from "./validator/toDoValidator"
 import {ResponseStruct} from "./common/response"
-import {ToDoModel} from "./repositories/toDoModel";
+import {ToDoQueryModel} from "./repositories/toDoModel";
 
 const todoListService = new ToDoService()
 
@@ -10,7 +10,7 @@ export const createTodoList = async (event: APIGatewayProxyEvent): Promise<APIGa
     const reqBody = JSON.parse(event.body as string);
     try {
         // validate
-        const todo = new ToDoModel(event.body);
+        const todo = new ToDoQueryModel(event.body);
         const todoListValidator = new ToDoValidator(todo);
         await todoListValidator.createValidate();
         const result = await todoListService.create(reqBody);
@@ -43,7 +43,7 @@ export const updateTodoList = async (event: APIGatewayProxyEvent): Promise<APIGa
     const reqBody = JSON.parse(event.body as string);
     try {
         // validate
-        const todo = new ToDoModel(event.body);
+        const todo = new ToDoQueryModel(event.body);
         const todoListValidator = new ToDoValidator(todo);
         await todoListValidator.updateValidate();
         const result = await todoListService.update(id, reqBody);

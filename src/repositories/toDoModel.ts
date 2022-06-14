@@ -1,4 +1,4 @@
-export class ToDoModel {
+export class ToDoQueryModel {
     title: string | undefined;
     description: string | undefined;
     priority: number | undefined;

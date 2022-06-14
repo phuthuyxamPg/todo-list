@@ -2,7 +2,7 @@ import {v4} from "uuid";
 import {PriorityCode} from "../enum/priorityCode"
 import * as Repo from "../repositories/toDoRepo"
 import {Config} from "../config";
-import {ToDoModel} from "../repositories/toDoModel";
+import {ToDoQueryModel} from "../repositories/toDoModel";
 
 const config = new Config();
 const db = config.TABLE_NAME;
@@ -12,7 +12,7 @@ export class ToDoService {
     constructor() {
         this.todoListRepo = new Repo.ToDoRepo();
     }
-    async create(data: ToDoModel) :Promise<object>{
+    async create(data: ToDoQueryModel) :Promise<Repo.GetItemOutput>{
         // biz create todo list
         data.priority = data.priority ? data.priority : PriorityCode.normal;
 
@@ -28,7 +28,7 @@ export class ToDoService {
         return this.todoListRepo.create(todoList);
     }
 
-    async all() :Promise<object>{
+    async all() :Promise<Repo.ScanOutput>{
         // biz get todo list
         const todoList : Repo.ScanItem = {
             TableName: String(db),
@@ -38,7 +38,7 @@ export class ToDoService {
         return this.todoListRepo.getAll(todoList);
     }
 
-    async find(id: string) :Promise<object>{
+    async find(id: string) :Promise<Repo.GetItemOutput>{
         // biz find todo list
         const todo : Repo.GetItem = {
             TableName: String(db),
@@ -50,7 +50,7 @@ export class ToDoService {
         return this.todoListRepo.get(todo);
     }
 
-    async update(id: string, data: ToDoModel) :Promise<object>{
+    async update(id: string, data: ToDoQueryModel) :Promise<Repo.UpdateItemOutPut>{
         // biz update todo item
         const todoRecord : Repo.UpdateItem = {
             TableName: String(db),
@@ -74,7 +74,7 @@ export class ToDoService {
         return this.todoListRepo.update(todoRecord);
     }
 
-    async delete(id: string) :Promise<object>{
+    async delete(id: string) :Promise<Repo.DeleteItemOutput>{
         // biz delete todo list
         const todo : Repo.DeleteItem = {
             TableName: String(db),
